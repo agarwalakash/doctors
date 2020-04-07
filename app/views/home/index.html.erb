@@ -7,5 +7,27 @@
 
 	<% if user_signed_in? && current_user.is_doctor %>
 		<%= link_to "Add Availability", new_availability_path %>
+		<%= link_to "Appointments", appointments_path %>
+	<% else %>
+		<%= link_to "Create Appointment", new_appointment_path %>
+		<%= link_to "Appointment List", appointments_path %>
 	<% end %>
 </div>
+
+<% if user_signed_in? && current_user.is_patient %>
+	<% if @doctors.present? %>
+		<div style="text-align: center;">
+			<h1>Doctors List</h1>
+			<table style="margin-right: auto;margin-left: auto;">
+				<tr>
+					<th>Doctor Name</th>
+				</tr>
+				<%@doctors.each do |doctor|%>
+					<tr><td><%= link_to "Dr. " + doctor.name %></td></tr>
+				<% end %>
+			</table>
+		</div>
+	<% else %>
+		<h1>Sorry! No doctor is available right now.</h1>
+	<% end %>
+<% end %>

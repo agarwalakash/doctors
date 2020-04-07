@@ -1,0 +1,45 @@
+<% if @appointments.present? %>
+	<h1 style="text-align: center;">Appointments List</h1>
+	<% if current_user.is_patient %>
+		<table style="margin-right: auto;margin-left: auto;">
+			<tr>
+				<th>Date</th>
+				<th>Doctor Name</th>
+				<th>Time</th>
+			</tr>
+			<% @appointments.each do |appointment|%>
+				<tr>
+					<td><%= appointment.appointment_date %></td>
+					<td><%= appointment.doctor.name %></td>
+					<td><%= appointment.appointment_time.strftime("%H:%M") %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% elsif current_user.is_doctor %>
+		<table style="margin-right: auto;margin-left: auto;">
+			<tr>
+				<th>Date</th>
+				<th>Patient Name</th>
+				<th>Time</th>
+				<th>Action</th>
+			</tr>
+			<% @appointments.each do |appointment|%>
+				<tr>
+					<td><%= appointment.appointment_date %></td>
+					<td><%= appointment.patient.name %></td>
+					<td><%= appointment.appointment_time.strftime("%H:%M") %></td>
+					<% if appointment.accept_appointment.nil? %>
+						<td>
+							<%= link_to "Accept", accept_appointment_path(appointment, accept: true) %> | <%= link_to "Reject", accept_appointment_path(appointment, accept: false) %>
+						</td>
+					<% else %>
+						<td><%= appointment.accept_appointment ? "Accepted" : "Rejected" %></td>
+					<% end %>
+					
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+<% else %>
+	<h1>Sorry! you have not any appointment.</h1>
+<% end %>

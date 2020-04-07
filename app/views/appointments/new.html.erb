@@ -1,0 +1,27 @@
+<div style="text-align: center;">
+	<h1>Create Appointment</h1>
+</div>
+
+<%= form_with(model: @appointment, url: appointments_path, method: "post", html: {style: "text-align: center"}) do |f| %>
+	
+	<div class="field">
+		<label>Select Doctor</label><br />
+		<%= f.select :doctor, Doctor.all.map{|doctor| [doctor.name, doctor.id]} %>
+	</div>
+
+	<div class="field">
+		<label>Appointment Date</label><br />
+		<%= f.date_field :appointment_date %>
+	</div>
+
+	<div class="field">
+		<label>Appointment Time</label><br />
+		<%= f.time_field :appointment_time, value: Time.now.strftime("%H:%M") %>
+	</div>
+
+	
+	<div class="action">
+		<%= f.submit "Create" %>
+	</div>
+	
+<% end %>

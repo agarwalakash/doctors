@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <% if flash.present? %>
+      <%= flash.alert %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

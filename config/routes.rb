@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :appointments do 
+  	member do
+  		get "accept"
+  	end
+  end
   resources :availabilities
   devise_for :users
   root to: 'home#index'
