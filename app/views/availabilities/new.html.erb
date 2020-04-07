@@ -1,0 +1,30 @@
+<div style="text-align: center;">
+	<h1>Add Availability</h1>
+</div>
+
+<%= form_with(model: @availability, url: availabilities_path, method: "post") do |f| %>
+	<div class="field">
+		<label>Start Date</label><br />
+		<%= f.date_field :start_date %>
+	</div>
+
+	<div class="field">
+		<label>End Date</label><br />
+		<%= f.date_field :end_date %>
+	</div>
+
+	<div class="field">
+		<label>Start Time</label><br />
+		<%= f.time_field :start_time, value: Time.now.strftime("%H:%M") %>
+	</div>
+
+	<div class="field">
+		<label>End Time</label><br />
+		<%= f.time_field :end_time, value: (Time.now + 1.hour).strftime("%H:%M") %>
+	</div>
+
+	<div class="action">
+		<%= f.submit "Create" %>
+	</div>
+	
+<% end %>

@@ -1,0 +1,11 @@
+<div style="float: right;">
+	<% if user_signed_in? %>
+		<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+	<%else%>
+		<%= link_to "LogIn", new_user_session_path %>
+	<% end %>
+
+	<% if user_signed_in? && current_user.is_doctor %>
+		<%= link_to "Add Availability", new_availability_path %>
+	<% end %>
+</div>
