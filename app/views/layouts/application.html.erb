@@ -10,6 +10,21 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <div class="topnav">
+        <% if current_user.is_doctor %>
+          <%= link_to "Add Availability", new_availability_path %>
+          <%= link_to "Appointments", appointments_path %>
+        <% else %>
+          <%= link_to "Create Appointment", new_appointment_path %>
+          <%= link_to "Appointment List", appointments_path %>
+        <% end %>
+
+          <%= link_to "Home", root_path %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+      </div>
+    <% end %>
+
     <% if flash.present? %>
       <%= flash.alert %>
     <% end %>

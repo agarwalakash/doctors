@@ -4,7 +4,12 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-    @availability = current_user.availabilities.create_and_save(params[:availability], current_user)
+    if Date.parse(params[:availability][:start_date]) < Date.today || Date.parse(params[:availability][:end_date]) < Date.today || (Date.parse(params[:availability][:start_date]) > Date.parse(params[:availability][:end_date]))
+      flash[:alert] = "Enter correct date"
+    else
+      @availability = current_user.availabilities.create_and_save(params[:availability], current_user)
+    end
+    
     redirect_to new_availability_path
   end
 

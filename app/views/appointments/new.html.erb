@@ -11,7 +11,7 @@
 
 	<div class="field">
 		<label>Appointment Date</label><br />
-		<%= f.date_field :appointment_date %>
+		<%= f.date_field :appointment_date, min: Date.today %>
 	</div>
 
 	<div class="field">
